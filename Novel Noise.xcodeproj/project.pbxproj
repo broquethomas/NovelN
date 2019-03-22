@@ -283,7 +283,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MHHLZ6U8L2;
+				DEVELOPMENT_TEAM = CPCVYFBK2G;
 				INFOPLIST_FILE = "Novel Noise/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -301,7 +301,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MHHLZ6U8L2;
+				DEVELOPMENT_TEAM = CPCVYFBK2G;
 				INFOPLIST_FILE = "Novel Noise/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
