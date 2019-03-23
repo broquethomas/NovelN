@@ -1,0 +1,6 @@
+framework module Pods_Novel_Noise {
+  umbrella header "Pods-Novel Noise-umbrella.h"
+
+  export *
+  module * { export * }
+}

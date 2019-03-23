@@ -1,0 +1,16 @@
+PODS:
+  - YoutubePlayer-in-WKWebView (0.2.4)
+
+DEPENDENCIES:
+  - YoutubePlayer-in-WKWebView (~> 0.2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - YoutubePlayer-in-WKWebView
+
+SPEC CHECKSUMS:
+  YoutubePlayer-in-WKWebView: 2d46d3a6d053900dede78a47378f12a8eacd8a91
+
+PODFILE CHECKSUM: efaf52d9686321463f1eb969c4e9b86e80f00617
+
+COCOAPODS: 1.5.3

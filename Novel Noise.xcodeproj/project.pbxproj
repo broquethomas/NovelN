@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A444AE650DB9117F22A3334 /* Pods_Novel_Noise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDE8DEF6220B9A5C913D194 /* Pods_Novel_Noise.framework */; };
 		BD7A6CDF223EDA810034A8A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7A6CDE223EDA810034A8A1 /* AppDelegate.swift */; };
 		BD7A6CE1223EDA810034A8A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7A6CE0223EDA810034A8A1 /* ViewController.swift */; };
 		BD7A6CE4223EDA810034A8A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD7A6CE2223EDA810034A8A1 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0BDE8DEF6220B9A5C913D194 /* Pods_Novel_Noise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Novel_Noise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		188FD5264AEA505A0A1FDE53 /* Pods-Novel Noise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Novel Noise.release.xcconfig"; path = "Pods/Target Support Files/Pods-Novel Noise/Pods-Novel Noise.release.xcconfig"; sourceTree = "<group>"; };
+		9368245D92E7363391390901 /* Pods-Novel Noise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Novel Noise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Novel Noise/Pods-Novel Noise.debug.xcconfig"; sourceTree = "<group>"; };
 		BD7A6CDB223EDA810034A8A1 /* Novel Noise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Novel Noise.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD7A6CDE223EDA810034A8A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD7A6CE0223EDA810034A8A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A444AE650DB9117F22A3334 /* Pods_Novel_Noise.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21D32916709DEF6F036938B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9368245D92E7363391390901 /* Pods-Novel Noise.debug.xcconfig */,
+				188FD5264AEA505A0A1FDE53 /* Pods-Novel Noise.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2EC31C41D335EF10AF27010B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0BDE8DEF6220B9A5C913D194 /* Pods_Novel_Noise.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BD7A6CD2223EDA810034A8A1 = {
 			isa = PBXGroup;
 			children = (
 				BD7A6CDD223EDA810034A8A1 /* Novel Noise */,
 				BD7A6CDC223EDA810034A8A1 /* Products */,
+				21D32916709DEF6F036938B6 /* Pods */,
+				2EC31C41D335EF10AF27010B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BD7A6CED223EDA830034A8A1 /* Build configuration list for PBXNativeTarget "Novel Noise" */;
 			buildPhases = (
+				38509C45DF21E14296525591 /* [CP] Check Pods Manifest.lock */,
 				BD7A6CD7223EDA810034A8A1 /* Sources */,
 				BD7A6CD8223EDA810034A8A1 /* Frameworks */,
 				BD7A6CD9223EDA810034A8A1 /* Resources */,
+				6784DF72D658B4357265902E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +155,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		38509C45DF21E14296525591 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Novel Noise-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6784DF72D658B4357265902E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Novel Noise/Pods-Novel Noise-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/YoutubePlayer-in-WKWebView/YoutubePlayer_in_WKWebView.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YoutubePlayer_in_WKWebView.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Novel Noise/Pods-Novel Noise-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BD7A6CD7223EDA810034A8A1 /* Sources */ = {
@@ -280,6 +353,7 @@
 		};
 		BD7A6CEE223EDA830034A8A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9368245D92E7363391390901 /* Pods-Novel Noise.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +372,7 @@
 		};
 		BD7A6CEF223EDA830034A8A1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 188FD5264AEA505A0A1FDE53 /* Pods-Novel Noise.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
