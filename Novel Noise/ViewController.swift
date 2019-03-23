@@ -8,21 +8,22 @@
 
 import UIKit
 import Speech
-
+import YoutubePlayer_in_WKWebView
 
 class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     
+    @IBOutlet weak var playerView: WKYTPlayerView!
     
     @IBOutlet weak var speechText: UILabel!
     
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
+    private var speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
     
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     
     private var recognitionTask: SFSpeechRecognitionTask?
     
-    private let audioEngine = AVAudioEngine()
+    private var audioEngine = AVAudioEngine()
     
     private var temporaryString = ""
     
@@ -34,7 +35,16 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private var running = false
     
-    private var testArray = ["this is a test", "checking if this will work", "this program should only detect seven words"]
+    private var currentStream = ""
+    
+    private var activeStream = false
+    
+    private let playVars = ["controls": 1, "playsinline": 1, "autohide": 1, "showinfo": 1, "autoplay": 1, "modestbranding": 1]
+    
+    private var ensureStreamLoaded = 0
+    
+    private var testArray = ["here on my own", "my room", "french peaking"]
+    private var streams = ["KQap5sj5TL4", "_Sf2Luv3_s0", "9t7DRLeofT8"]
     // MARK: UIViewController
     
     public override func viewDidLoad() {
@@ -42,6 +52,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         // Disable the record buttons until authorization has been granted.
         //recordButton.isEnabled = false
+        
+        startTimer()
+        
     }
     
     override public func viewDidAppear(_ animated: Bool) {
@@ -49,6 +62,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         // Configure the SFSpeechRecognizer object already
         // stored in a local member variable.
         speechRecognizer.delegate = self
+        //playerView.load(withVideoId: "Mc0TMWYTU_k", playerVars: playVars)
         
         // Make the authorization request.
         SFSpeechRecognizer.requestAuthorization { authStatus in
@@ -78,6 +92,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
     }
     
+    
+    
     @IBAction func startStop(_ sender: Any) {
         if audioEngine.isRunning {
             audioEngine.stop()
@@ -98,6 +114,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     private func startRecording() throws {
         
         // Cancel the previous task if it's running.
+        print("Made it in here")
         if let recognitionTask = recognitionTask {
             recognitionTask.cancel()
             self.recognitionTask = nil
@@ -121,8 +138,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             var modify = ""
             if let result = result {
                 // Update the text view with the results.
-                if checkLength(theString: result.bestTranscription.formattedString){
-                    modify = changeLength(theString: result.bestTranscription.formattedString)
+                if self.checkLength(theString: result.bestTranscription.formattedString){
+                    modify = self.changeLength(theString: result.bestTranscription.formattedString)
                 }else{
                     modify = result.bestTranscription.formattedString
                 }
@@ -135,39 +152,14 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             if error != nil || isFinal {
                 // Stop recognizing speech if there is a problem.
                 self.audioEngine.stop()
+                print("got here")
                 inputNode.removeTap(onBus: 0)
                 
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
-                
-                //self.recordButton.isEnabled = true
-                //self.recordButton.setTitle("Start Recording", for: [])
             }
         }
-        
-        func checkLength(theString: String) -> Bool{
-            var array = theString.components(separatedBy: " ")
-            if array.count > 8{
-                if timer.isValid{
-                    
-                }else{
-                    startTimer()
-                }
-                return true
-            }else{
-                return false
-            }
-            return false
-        }
-        
-        func changeLength(theString: String) -> String{
-            var array = theString.components(separatedBy: " ")
-            var count = array.count
-            var newArray = [array[count-8], array[count-7], array[count-6], array[count-5], array[count-4], array[count-3], array[count-2], array[count-1]]
 
-            return newArray.joined(separator:" ")
-        }
-        
         // Configure the microphone input.
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
@@ -193,10 +185,57 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
     }
     
+    func checkLength(theString: String) -> Bool{
+        var array = theString.components(separatedBy: " ")
+        if array.count > 8{
+            /*
+             if timer.isValid{
+             
+             }else{
+             startTimer()
+             }
+             */
+            return true
+        }else{
+            return false
+        }
+        return false
+    }
+    
+    func changeLength(theString: String) -> String{
+        var array = theString.components(separatedBy: " ")
+        var count = array.count
+        var newArray = [array[count-8], array[count-7], array[count-6], array[count-5], array[count-4], array[count-3], array[count-2], array[count-1]]
+        
+        return newArray.joined(separator:" ")
+    }
+    
+    func resetRecord(){
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+            recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+            //recordButton.isEnabled = false
+            //recordButton.setTitle("Stopping", for: .disabled)
+        } else {
+            do {
+                
+                try startRecording()
+                //recordButton.setTitle("Stop Recording", for: [])
+            } catch {
+                //recordButton.setTitle("Recording Not Available", for: [])
+            }
+        }
+    }
+    
     // MARK: Interface Builder actions
     
     @objc func checkSpokenWord(){
-        
+        if ensureStreamLoaded == 8{
+            initialLaunch()
+            ensureStreamLoaded = 0
+        }
+        ensureStreamLoaded += 1
         if temporaryString != ""{
             if checkString == temporaryString{
                 pauseCount += 1
@@ -215,12 +254,25 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     func checkSentence(){
-
+        var index = 0
         for x in testArray{
-            if x == retrievePartial(total: getSentenceLength(words: x)){
-                print("found: " + x)
+            if x == retrievePartial(total: getSentenceLength(words: x)) {
+                if currentStream == streams[index]{
+                    
+                }else{
+                    resetRecord()
+                    playerView.load(withVideoId: streams[index], playerVars: playVars)
+                    currentStream = streams[index]
+                    playerView.playVideo()
+                }
+                
             }
+            index += 1
         }
+    }
+    
+    func initialLaunch(){
+        playerView.playVideo()
     }
     
     func getSentenceLength(words: String) -> Int{

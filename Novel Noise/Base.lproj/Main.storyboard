@@ -18,26 +18,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cJ-pl-STk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cJ-pl-STk">
                                 <rect key="frame" x="16" y="38" width="343" height="281"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="281" id="mKL-7E-wg4"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rof-CB-YBV">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rof-CB-YBV">
                                 <rect key="frame" x="152" y="334" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Start/Stop"/>
                                 <connections>
                                     <action selector="startStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0yI-qc-Sv0"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3mA-o3-QRj" customClass="WKYTPlayerView">
+                                <rect key="frame" x="0.0" y="437" width="375" height="210"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="3mA-o3-QRj" secondAttribute="height" multiplier="25:14" id="0f4-3D-jUl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3mA-o3-QRj" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="C5r-D7-SAx"/>
+                            <constraint firstItem="0cJ-pl-STk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="JXg-Aw-ocr"/>
+                            <constraint firstItem="3mA-o3-QRj" firstAttribute="centerX" secondItem="Rof-CB-YBV" secondAttribute="centerX" id="Udq-xC-RPJ"/>
+                            <constraint firstItem="3mA-o3-QRj" firstAttribute="centerX" secondItem="0cJ-pl-STk" secondAttribute="centerX" id="Xz9-4V-ttB"/>
+                            <constraint firstItem="0cJ-pl-STk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Ygv-bs-eSN"/>
+                            <constraint firstItem="3mA-o3-QRj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="et0-Lg-2T0"/>
+                            <constraint firstItem="3mA-o3-QRj" firstAttribute="top" secondItem="Rof-CB-YBV" secondAttribute="bottom" constant="73" id="wIS-dO-ebq"/>
+                            <constraint firstAttribute="bottom" secondItem="3mA-o3-QRj" secondAttribute="bottom" constant="20" symbolic="YES" id="y8K-CR-vrZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="playerView" destination="3mA-o3-QRj" id="4wL-R6-eQK"/>
                         <outlet property="speechText" destination="0cJ-pl-STk" id="Vzf-vY-2ES"/>
                     </connections>
                 </viewController>
